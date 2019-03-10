@@ -1,0 +1,166 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<link href="style.css" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" href="animate.css">
+
+<script>
+var px=0;
+var text = new Array();
+
+function callOnce(){
+
+var s=10;
+//text = ["Java","Javascript","C++","UNIX","CSS","HTML","Python","experience","code","design","UI","skills"];
+
+var mat = new Array();
+var matCol= new Array();
+for ( x=0;x<s;x++){
+mat[x]= new Array();
+matCol[x]= new Array();
+for ( y=0;y<s;y++){
+mat [x][y]=" ";
+matCol [x][y]=0;
+}
+check();
+}
+
+
+
+
+
+for (j =0;j<text.length;j++){
+
+var l =text[j].length;
+var quitHori = false;
+var quitVert = false;
+var col= cPick();
+
+if (Math.floor((Math.random() * 20))<10){
+var x=Math.floor((Math.random() * (s-l)));
+var y=Math.floor((Math.random() * s));
+
+//verif
+for (i =0;i<l;i++){
+if (mat[x+i][y]!==' ' )//|| mat[x+i][y]===text[j].charAt(i)
+quitHori=true;
+}
+//write
+for (i =0;i<l && !quitHori ;i++){
+mat[x+i][y]=text[j].charAt(i);
+matCol[x+i][y]=col;
+}
+
+
+}else{
+var y=Math.floor((Math.random() * (s-l)));
+var x=Math.floor((Math.random() * s));
+
+//
+for (i =0;i<l;i++){
+if (mat[x][y+i]!==' ' )//|| mat[x][y+i]===text[j].charAt(i)
+quitVert=true;
+}
+
+//
+for (i =0;i<l && !quitVert ;i++){
+mat[x][y+i]=text[j].charAt(i);
+matCol[x][y+i]=col;
+}
+
+}
+
+}
+
+
+
+
+var txt="";
+
+for ( y=0;y<s;y++){
+
+for ( x=0;x<s;x++){
+
+if (mat[x][y]===' ')
+txt += "<div class=\"clean\" style=\"margin-left: "+x*50+"px; margin-top: "+y*50+"px\" >"+mat[x][y]+"</div>";
+else
+txt += "<div style=\"margin-left: "+x*50+"px; margin-top: "+y*50+"px;background-color: #"+matCol[x][y] +";\" class=\"animated  bounceIn\" >"+mat[x][y]+"</div>";
+
+}
+txt +="<br>";
+}
+document.getElementById('grid').innerHTML = txt;
+
+setTimeout( 'callOnce();', 10000);
+
+}
+
+
+function cPick(){
+
+var n=0;
+var v = Math.floor((Math.random() * 9));
+n+=v;
+var v = Math.floor((Math.random() * 9));
+n+=v*10;
+var v = Math.floor((Math.random() * 9));
+n+=v*100;
+
+
+return n;
+}
+//
+
+
+function check(){
+
+text = [];
+var t="";
+
+for (i=1 ;i<13;i++){
+var w=ind(i);
+if (w.checked){
+text.push(w.value);
+}
+}
+
+
+document.getElementById('h1').innerHTML = t;
+
+}
+
+function ind(i){
+return document.getElementById("b"+i)
+}
+
+
+
+</script>
+</head>
+<body onload="callOnce()">
+
+
+<h1 id="title" >QbasicFan</h1>
+<p id="h1">time</p>
+<br>
+  <input type="checkbox" name="gender" value="Java" onclick="check()" id="b1" checked> Java
+  <input type="checkbox" name="gender" value="Javascript" onclick="check()" id="b2" checked> Javascript
+  <input type="checkbox" name="gender" value="C++" onclick="check()" id="b3" checked> C++
+  <input type="checkbox" name="gender" value="UNIX" onclick="check()" id="b4" checked> UNIX<br>
+  <input type="checkbox" name="gender" value="CSS" onclick="check()" id="b5" checked> CSS
+  <input type="checkbox" name="gender" value="HTML" onclick="check()" id="b6" checked> HTML
+  <input type="checkbox" name="gender" value="Python" onclick="check()" id="b7" checked> Python
+  <input type="checkbox" name="gender" value="experience" onclick="check()" id="b8" checked> experience<br>
+  <input type="checkbox" name="gender" value="code" onclick="check()" id="b9" checked> code
+  <input type="checkbox" name="gender" value="design" onclick="check()" id="b10" checked> design
+  <input type="checkbox" name="gender" value="UI" onclick="check()" id="b11" checked> UI
+  <input type="checkbox" name="gender" value="skills" onclick="check()" id="b12" checked> skills<br>
+
+<br>
+
+
+<br>
+<p id ="grid">My first paragraph.</p>
+
+</body>
+</html>
