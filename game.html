@@ -2,7 +2,59 @@
 <html>
 <head>
 <link href="style.css" type="text/css" rel="stylesheet" />
-	<link rel="stylesheet" href="animate.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<style>
+
+body {
+background-color: #fff;
+
+}
+
+div {
+position: absolute;
+border-radius: 5px;
+    background-color: lightgrey;
+    width: 10px;
+    padding: 10px;
+    border: 10px solid navy;
+    margin: 0px;
+
+}
+
+
+
+
+div.clean {
+    background-color: lightgrey;
+    width: 0px;
+    padding: 0px;
+    border: 0px solid #fff;
+    margin: 0px;
+}
+
+
+
+.staticBar {
+position: fixed;
+    background-color: blue;
+
+    padding: 2px;
+    margin: 0px; 
+}
+
+.mouvingBar {
+position: absolute;
+
+    background-color: green;
+    width: 0px;
+    padding-left: 10%;
+    margin: 0px;
+
+}
+
+</style>
+
+
 
 <script>
 var px=0;
@@ -76,22 +128,28 @@ matCol[x][y+i]=col;
 
 
 var txt="";
+/* track screen dimensions
+to reset square size
+*/
+
+var sqSize = 50;
+
 
 for ( y=0;y<s;y++){
 
 for ( x=0;x<s;x++){
 
 if (mat[x][y]===' ')
-txt += "<div class=\"clean\" style=\"margin-left: "+x*50+"px; margin-top: "+y*50+"px\" >"+mat[x][y]+"</div>";
+txt += "<div class=\"clean\" style=\"margin-left: "+x*sqSize+"px; margin-top: "+y*sqSize+"px\" >"+mat[x][y]+"</div>";
 else
-txt += "<div style=\"margin-left: "+x*50+"px; margin-top: "+y*50+"px;background-color: #"+matCol[x][y] +";\" class=\"animated  bounceIn\" >"+mat[x][y]+"</div>";
+txt += "<div style=\"margin-left: "+x*sqSize+"px; margin-top: "+y*sqSize+"px;background-color: #"+matCol[x][y] +";\" class=\"animated  bounceIn\" >"+mat[x][y]+"</div>";
 
 }
 txt +="<br>";
 }
 document.getElementById('grid').innerHTML = txt;
 
-setTimeout( 'callOnce();', 10000);
+setTimeout( 'callOnce();', 3000);
 
 }
 
@@ -101,9 +159,9 @@ function cPick(){
 var n=0;
 var v = Math.floor((Math.random() * 9));
 n+=v;
-var v = Math.floor((Math.random() * 9));
+var v = Math.floor((Math.random() * 5));
 n+=v*10;
-var v = Math.floor((Math.random() * 9));
+var v = Math.floor((Math.random() * 2));
 n+=v*100;
 
 
